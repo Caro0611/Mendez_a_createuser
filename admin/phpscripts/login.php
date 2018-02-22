@@ -4,6 +4,7 @@
 		require_once('connect.php');
 		$username = mysqli_real_escape_string($link, $username);
 		$password = mysqli_real_escape_string($link, $password);
+		$password = hash('sha256', $password);
 		$loginstring = "SELECT * FROM tbl_user WHERE user_name='{$username}' AND user_pass='{$password}'";
 		$user_set = mysqli_query($link, $loginstring);
 		//echo mysqli_num_rows($user_set);
@@ -18,7 +19,7 @@
 			}
 			redirect_to("admin_index.php");
 		}else{
-			$message = "Learn how to type you dumba&*.";
+			$message = "Incorrect information, please try again";
 			return $message;
 		}
 
